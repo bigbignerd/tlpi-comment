@@ -34,7 +34,9 @@ main(int argc, char *argv[])
     /* 'fd1' and 'fd2' share same open file table entry (and thus file
        offset). 'fd3' has its own open file table entry, and thus a
        separate file offset. */
-
+    /* 打开同一个文件两次会产生两个文件描述符=>对应两个description => 对应同一个i-mode(同一个文件) 不共享offset
+     * dup复制文件描述符是两个文件描述符 => 对应同一个description => 对应同一个i-node 因此共享offset
+     */
     if (write(fd1, "Hello,", 6) == -1)
         errExit("write1");
     system(cmd);

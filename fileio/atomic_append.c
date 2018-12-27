@@ -14,6 +14,13 @@
 #include <fcntl.h>
 #include "tlpi_hdr.h"
 
+/**
+ * 执行结果
+ * -rw------- 1 root root 2000000 Dec 27 10:11 f1
+ * -rw------- 1 root root 1017117 Dec 27 10:11 f2
+ * 所以在并发写同一个文件的时候，不使用O_APPEND 不能保证原子性
+ * 关键就在于打开相同的文件，文件描述符不同，但是共享文件描述中的offset
+ */
 int
 main(int argc, char *argv[])
 {
