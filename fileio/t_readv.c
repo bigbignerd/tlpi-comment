@@ -34,7 +34,10 @@ main(int argc, char *argv[])
         errExit("open");
 
     totRequired = 0;
-
+    /* 
+     * 仅限于表达可以连续的读取文件，依次填充iov0 iov1 iov2这3个缓冲区，如果你试图
+     * 打印缓冲区的内容，可能并不能得到预期的结果
+     */
     iov[0].iov_base = &myStruct;
     iov[0].iov_len = sizeof(struct stat);
     totRequired += iov[0].iov_len;
