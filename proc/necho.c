@@ -16,7 +16,7 @@ int
 main(int argc, char *argv[])
 {
     int j;
-
+    /* argc argv还可以在其他任何的函数中通过/proc/PID/cmdline */
     for (j = 0; j < argc; j++)
         printf("argv[%d] = %s\n", j, argv[j]);
 
