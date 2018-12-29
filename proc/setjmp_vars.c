@@ -23,6 +23,10 @@ doJump(int nvar, int rvar, int vvar)
     longjmp(env, 1);
 }
 
+/**
+ * 当编译指定-O 也就是编译优化的时候，一些变量会被放到寄存器中
+ * 但是setjmp 保存的env，在longjmp执行完恢复上下文的时候，寄存器中的值不会被恢复
+ */
 int
 main(int argc, char *argv[])
 {

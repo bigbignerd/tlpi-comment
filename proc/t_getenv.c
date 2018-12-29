@@ -19,7 +19,8 @@ main(int argc, char *argv[])
 
     if (argc != 2 || strcmp(argv[1], "--help") == 0)
         usageErr("%s environ-var\n", argv[0]);
-
+    /* SUSV3 标准允许genenv的实现使用静态缓冲区返回环境变量的值（缓冲区可能会被接下来的getenv调用覆盖），
+       尽管gblic没有使用这种方式（静态缓冲区）实现，安全起见还是复制到另外的地方*/
     val = getenv(argv[1]);
     printf("%s\n", (val != NULL) ? val : "No such variable");
 

@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+//#define TEST_IT
 
 int
 unsetenv(const char *name)

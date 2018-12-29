@@ -32,6 +32,8 @@ f1(int argc)
 int
 main(int argc, char *argv[])
 {
+    /* setjmp保存进程的当前上线文信息到env，除此之外还保存了计数寄存器中的一个副本，以及当前栈指针寄存器中的位置信息
+     * longjmp使用同样的env，所以可以找到回去的路，setjmp只有初始化的时候返回0，其他时候返回longjmp的val*/
     switch (setjmp(env)) {
     case 0:     /* This is the return after the initial setjmp() */
         printf("Calling f1() after initial setjmp()\n");

@@ -1,3 +1,5 @@
 *.a
 tags
 *.o
+*.swp
+*.inc
