@@ -25,11 +25,11 @@ main(int argc, char *argv[])
 
     if (argc < 3 || strcmp(argv[1], "--help") == 0)
         usageErr("%s num-allocs block-size [step [min [max]]]\n", argv[0]);
-
+    /* 指定分配到少块，必须是>0的值 */
     numAllocs = getInt(argv[1], GN_GT_0, "num-allocs");
     if (numAllocs > MAX_ALLOCS)
         cmdLineErr("num-allocs > %d\n", MAX_ALLOCS);
-
+    /* 每块的大小 */
     blockSize = getInt(argv[2], GN_GT_0 | GN_ANY_BASE, "block-size");
 
     freeStep = (argc > 3) ? getInt(argv[3], GN_GT_0, "step") : 1;
@@ -38,7 +38,7 @@ main(int argc, char *argv[])
 
     if (freeMax > numAllocs)
         cmdLineErr("free-max > num-allocs\n");
-
+    /* 打印当前堆的边界地址 */
     printf("Initial program break:          %10p\n", sbrk(0));
 
     printf("Allocating %d*%d bytes\n", numAllocs, blockSize);
