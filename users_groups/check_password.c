@@ -58,7 +58,7 @@ main(int argc, char *argv[])
     password = getpass("Password: ");
 
     /* Encrypt password and erase cleartext version immediately */
-
+    /* 避免在程序运行崩溃产生core文件，这些明文的密码可能会出现在core文件中，所以尽可能早的抹除 */
     encrypted = crypt(password, pwd->pw_passwd);
     for (p = password; *p != '\0'; )
         *p++ = '\0';

@@ -27,7 +27,7 @@ main(int argc, char *argv[])
     gid_t suppGroups[SG_SIZE];
     int numGroups, j;
     char *p;
-
+    /* real userid , effective user id, saved set user id */
     if (getresuid(&ruid, &euid, &suid) == -1)
         errExit("getresuid");
     if (getresgid(&rgid, &egid, &sgid) == -1)
@@ -36,7 +36,7 @@ main(int argc, char *argv[])
     /* Attempts to change the file-system IDs are always ignored
        for unprivileged processes, but even so, the following
        calls return the current file-system IDs */
-
+    
     fsuid = setfsuid(0);
     fsgid = setfsgid(0);
 
