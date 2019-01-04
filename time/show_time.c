@@ -22,7 +22,7 @@ main(int argc, char *argv[])
     time_t t;
     struct tm *loc;
     char buf[BUF_SIZE];
-
+    /* 设置地域化的信息， 第二个参数为空字符串，区域名称根据环境变量来设置 */
     if (setlocale(LC_ALL, "") == NULL)
         errExit("setlocale");   /* Use locale settings in conversions */
 
