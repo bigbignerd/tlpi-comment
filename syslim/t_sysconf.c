@@ -16,7 +16,7 @@ static void             /* Print 'msg' plus sysconf() value for 'name' */
 sysconfPrint(const char *msg, int name)
 {
     long lim;
-
+    /* 当出错或者limit的值不确定，sysconf都会返回-1，区别在于发生错误的时候errno为EINVAL，所以必须先初始化为0以便区别是否发生了错误 */
     errno = 0;
     lim = sysconf(name);
     if (lim != -1) {        /* Call succeeded, limit determinate */
