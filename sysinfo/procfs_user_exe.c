@@ -52,10 +52,10 @@ main(int argc, char *argv[])
             else
                 break;
         }
-
+        /* 过滤掉非目录类型的文件 和 文件名非数字的目录 */
         if (dp->d_type != DT_DIR || !isdigit((unsigned char) dp->d_name[0]))
             continue;
-
+        /* 将db->d_name格式化后保存到 path中 */
         snprintf(path, PATH_MAX, "/proc/%s/status", dp->d_name);
 
         fp = fopen(path, "r");
@@ -73,6 +73,7 @@ main(int argc, char *argv[])
                this process is running */
 
             if (strncmp(line, "Name:", 5) == 0) {
+                
                 for (p = line + 5; *p != '\0' && isspace((unsigned char) *p); )
                     p++;
                 strncpy(cmd, p, MAX_LINE - 1);
@@ -85,6 +86,7 @@ main(int argc, char *argv[])
                and file-system user IDs */
 
             if (strncmp(line, "Uid:", 4) == 0) {
+                /* string to long int */
                 uid = strtol(line + 4, NULL, 10);
                 gotUid = TRUE;
             }

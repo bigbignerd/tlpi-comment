@@ -32,6 +32,7 @@ main(int argc, char *argv[])
 
     if (argc > 1)
         printf("Old value: ");
+    /* %.*s n会代替s，表示输出字符的个数，还有一种用法 %*.*s 需要提供两个参数，第一个*表示输出字符总宽度，第二个*表示输出字符个数 */
     printf("%.*s", (int) n, line);
 
     if (argc > 1) {
