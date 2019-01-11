@@ -11,7 +11,7 @@
 
 #define MAX_PROCESS_NUM 1024
 #define MAX_LINE 1000
-void printChild(int pid, int *ps, char name[MAX_PROCESS_NUM][MAX_LINE], int n, int nextLevel) ;
+void printChild(int pid, int *ps, char name[][MAX_LINE], int n, int nextLevel) ;
 
 int main(int argc, char *argv[])
 {
@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
     //打印
     for (i = 0; i < MAX_PROCESS_NUM; i++) {
         if (ps[i]> -1) {
-            printf("+|%d  %s\n", ps[i], "idle");  
+            printf("+|%d %s\n", ps[i], "idle");  
             printChild(ps[i], ps, nameMap, MAX_PROCESS_NUM, level+1);
             break;
         }    
@@ -108,10 +108,10 @@ int main(int argc, char *argv[])
     return 0;
 }
 /* 递归打印 */
-void printChild(int pid, int *ps, char name[MAX_PROCESS_NUM][MAX_LINE], int n, int nextLevel) {
+void printChild(int pid, int *ps, char name[][MAX_LINE], int n, int nextLevel) {
     int i;
     //找到pid所有的子节点
-    for (i = 0; i < n; i++) {
+    for (i = pid; i < n; i++) {
         if (ps[i] == pid) {
             printf("%*.s-|%2d %s", nextLevel*4, " ",i,  name[i]);    
             printChild(i, ps, name, n, nextLevel+1);
